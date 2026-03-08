@@ -11,11 +11,9 @@ Tujuan analisis ini adalah untuk mengetahui hasil analisis Differentially Expres
 # Metode
 # Analisis Menggunakan GEO2R
 **1.	Pencarian dan Pengunduhan Dataset Ekspresi Gen Publik Kanker Serviks**
-
 Dataset yang digunakan yaitu GSE63514 Homo sapiens yang diambil dari database Gene Expression Omnibus (GEO) (https://www.ncbi.nlm.nih.gov/geo/). Dataset ini dipilih karena berisi data mengenai ekspresi gen pada sel epitel serviks normal, sel epitel prakanker serviks meliputi CIN1, CIN2, dan CIN3, hingga sel epitel kanker serviks. 
 
 **2.	Identifikasi Differentially Expressed Genes (DEGs) Pada Kanker Serviks**
-
 Identifikasi menggunakan alat analisis online GEO2R (https://www.ncbi.nlm.nih.gov/geo/geo2r). GEO2R digunakan untuk mengidentifikasi gen-gen yang dieskpresikan secara berbeda berdasarkan kondisi biologis atau perlakuan. Dalam analisis ini yaitu mengidentifikasi ekspresi gen yang berbeda pada sampel sel epitel serviks sehat atau normal sebanyak 24 sampel, serta sel epitel dengan tingkat lesi prakanker serviks yang berbeda diantaranya CIN1 sebanyak 14 sampel, CIN2 sebanyak 22 sampel, dan CIN 3 sebanyak 40 sampel.
 Sampel dilakukan pengelompokkan yaitu Group 1 = sel epitel serviks pasien sehat (Kontrol) dan Group 2 = sel epitel pasien dengan lesi prakanker serviks CIN1, CIN2, CIN3 (penderita prakanker serviks) yang berbeda. Koreksi multiple testing menggunakan metode Benjamini & Hochberg (False Discovery Rate). Metode Benjamini & Hochberg (FDR) digunakan untuk mengurangi kemungkinan kesalahan tipe I akibat dari pengujian ribuan gen secara bersamaan. Perhitungan differential expression menggunakan metode limma. Gen dikategorikan sebagai DEGs apabila memenuhi kriteria:  Adjusted p-value < 0,05 dan |log2 fold change| ≥ 0 tertera pada Gambar 3. Untuk memastikan konsistensi hasil, analisis GEO2R dilakukan sebanyak tiga kali replikasi dengan parameter dan alur yang sama.
 
