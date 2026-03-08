@@ -6,6 +6,7 @@ Dibuat oleh: Syarifah Tashara
 
 # Pendahuluan
 Kanker serviks merupakan salah satu jenis kanker dengan penyumbang kematian tertinggi pada wanita didunia. Menurut data Global Burden of Cancer Study (Globocan) dari World Health Organization (WHO) tahun 2022, sekitar 36.964 (16,8%) perempuan Indonesia terkena kanker serviks paling tinggi kedua setelah kanker payudara. Faktor utama penyebab kanker serviks yaitu akibat dari infeksi Human Papilloma Virus (HPV) yang ditularkan melalui kontak seksual (Karimah et al., 2025). Infeksi HPV umumnya berkembang secara bertahap dimana sel Normal Serviks akan berubah menjadi lesi pada sel intraepitel serviks hingga akhirnya menjadi kanker (Yo & Kartika, 2023). Lesi intraepitel serviks atau Cervical intraepithelial Neoplasia (PRAKANKER SERVIKS) merupakan perubahan abNormal Serviks awal pada sel epitel serviks sebelum menjadi kanker serviks (Waghe & Neema, 2024). Lesi prakanker ini terbagi menjadi tiga tingkat perubahan yang mengindikasikan tingkat keparahan sel, yaitu PRAKANKER SERVIKS1 (perubahan sel epitel serviks ringan), PRAKANKER SERVIKS2 (perubahan sel epitel serviks sedang), dan PRAKANKER SERVIKS3 (Perubahan sel epitel serviks berat) (den Boon et al., 2015). Tingkat lesi PRAKANKER SERVIKS ini sangat penting untuk mendeteksi perubahan sel serviks secara dini dan menghentikan lesi agar tidak meluas dan berkembang menjadi kanker serviks. Beberapa metode telah dikembangkan saat ini untuk mengidentifikasi tingkat PRAKANKER SERVIKS diantaranya Pap smear dan tes HPV (Mayasari, 2025). Namun, beberapa kasus lesi PRAKANKER SERVIKS ini seringkali tidak menunjukkan adanya gejala tahap awal (Mello & Renee, 2023). Hal ini menyebabkan keterlambatan diagnosis yang menyebabkan penyakit ini berkembang menjadi kanker serviks tingkat lanjut. Perkembangan teknologi saat ini telah memungkinkan untuk mengindentifikasi perubahan ekspresi gen-gen yang berperan dalam perkembangan penyakit. Salah satu metode yang telah banyak digunakan yaitu transkriptomik yang dapat menganalisis Differentially Expressed Genes (DEGs) pada jaringan Normal Serviks hingga kanker (Shemuel et al., 2023). Melalui analisis ini, dapat diketahui juga gen-gen yang berperan dalam perkembangan lesi prakanker serviks sehingga dapat mendukung upaya deteksi dini serta pengobatan yang tepat. 
+
 Tujuan analisis ini adalah untuk mengetahui hasil analisis Differentially Expressed Genes (DEGs) pada pasien dengan kondisi berbeda, yaitu antara jaringan serviks sehat sebagai Normal Serviks (Normal Serviks) dan jaringan prakanker serviks dengan tingkat lesi yang berbeda, yaitu Cervical Intraepithelial Neoplasia tingkat PRAKANKER SERVIKS1, PRAKANKER SERVIKS2, dan PRAKANKER SERVIKS3, serta melakukan visualisasi dan interpretasi data ekspresi gen untuk memahami perubahan gen yang berperan dalam perkembangan lesi prakanker serviks.
 
 # Metode
@@ -17,6 +18,7 @@ Dataset yang digunakan yaitu GSE63514 Homo sapiens yang diambil dari database Ge
 **2.	Identifikasi Differentially Expressed Genes (DEGs) Pada Kanker Serviks**
 
 Identifikasi menggunakan alat analisis online GEO2R (https://www.ncbi.nlm.nih.gov/geo/geo2r). GEO2R digunakan untuk mengidentifikasi gen-gen yang dieskpresikan secara berbeda berdasarkan kondisi biologis atau perlakuan. Dalam analisis ini yaitu mengidentifikasi ekspresi gen yang berbeda pada sampel sel epitel serviks sehat atau normal sebanyak 24 sampel, serta sel epitel dengan tingkat lesi prakanker serviks yang berbeda diantaranya CIN1 sebanyak 14 sampel, CIN2 sebanyak 22 sampel, dan CIN 3 sebanyak 40 sampel.
+
 Sampel dilakukan pengelompokkan yaitu Group 1 = sel epitel serviks pasien sehat (Kontrol) dan Group 2 = sel epitel pasien dengan lesi prakanker serviks CIN1, CIN2, CIN3 (penderita prakanker serviks) yang berbeda. Koreksi multiple testing menggunakan metode Benjamini & Hochberg (False Discovery Rate). Metode Benjamini & Hochberg (FDR) digunakan untuk mengurangi kemungkinan kesalahan tipe I akibat dari pengujian ribuan gen secara bersamaan. Perhitungan differential expression menggunakan metode limma. Gen dikategorikan sebagai DEGs apabila memenuhi kriteria:  Adjusted p-value < 0,05 dan |log2 fold change| ≥ 0 tertera pada Gambar 3. Untuk memastikan konsistensi hasil, analisis GEO2R dilakukan sebanyak tiga kali replikasi dengan parameter dan alur yang sama.
 
 **3.	Analisis Visualisasi Differentially Expressed Genes (DEGs) Pada Kanker Serviks**
@@ -54,11 +56,13 @@ d. Selanjutnya menginstal dplyr untuk memotong dan merapikan tabel data agar mud
 
 install.packages("dplyr")
 
-e. Setelah itu menginstal paket CRAN untuk visualisasi meliputi ggplot (Volcano Plot), pheatmap (Heatmap), gplots & RcolorBrewer (Diagram Venn dan palet warna), dan UMAP. Dengan menggunakan script tertera:
+e. Setelah itu menginstal paket CRAN untuk visualisasi meliputi ggplot (Volcano Plot), pheatmap (Heatmap), gplots & 
+RcolorBrewer (Diagram Venn dan palet warna), dan UMAP. Dengan menggunakan script tertera:
 
 install.packages(c("ggplot2", "pheatmap", "gplots", "RColorBrewer"))
 
 f. Tahap terakhir cek instalasi. Dengan menggunakan script tertera:
+
 library(GEOquery)
 library(limma)
 library(dplyr)
@@ -79,16 +83,24 @@ feature_info <- fData(gset)
 
 **2.5. Pre-Processing Data Ekspresi**
 Proses pre-processing dilakukan untuk memastikan bahwa data ekspresi gen sesuai sebelum dianalisis DEG. Proses pre-processing menggunakan script tertera:
+
 Mengambil matriks ekspresi menggunakan script tertera:
+
 ex <- exprs(gset)
+
 Menghitung distribusi nilai kuantil menggunakan script tertera:
+
 qx <- as.numeric(quantile(ex, 
 c(0, 0.25, 0.5, 0.75, 0.99, 1), 
 na.rm = TRUE))
+
 Menentukan apakah perlu transform log2 menggunakan script tertera:
+
 LogTransform <- (qx[5] > 100) || 
 (qx[6] - qx[1] > 50 && qx[2] > 0)
+
 Melakukan transformasi log2 jika diperlukan menggunakan script tertera:
+
 if (LogTransform) {
 ex[ex <= 0] <- NA
 ex <- log2(ex)
@@ -96,10 +108,14 @@ ex <- log2(ex)
 
 **2.6. Definisi Kelompok Sampel**
 Proses definisi kelompok sampel dilakukan untu mengekompokkan sampel yang terdapat pada dataset GSE63514 berdasarkan kondisi biologis.
+
 Melihat metadata sampel menggunakan script tertera:
+
 sample_info <- pData(gset)
 group_info <- sample_info$source_name_ch1
+
 Melakukan grouping pada sampel menggunakan script tertera:
+
 groups <- ifelse(
 grepl("normal", group_info, ignore.case = TRUE), "Normal_Serviks",
 ifelse(grepl("low grade|moderate grade|high grade", group_info, ignore.case = TRUE),
@@ -107,10 +123,12 @@ ifelse(grepl("low grade|moderate grade|high grade", group_info, ignore.case = TR
 )
 groups <- factor(groups)
 table(groups)
+
 Menghilangkan kelompok sampel kanker serviks menggunakan script tertera:
 keep <- !is.na(groups)
 gset <- gset[, keep]
 groups <- groups[keep]
+
 Melakukan pengecekan ulang menggunakan script tertera:
 table(groups)
 dim(exprs(gset))
@@ -127,7 +145,9 @@ levels = design
 )
 
 **2.8. Analisis Differentially Expressed Gene (DEG) dengan Limma**
+
 Analisis DEG dilakukaan menggunakan paket linear model linear dan metode Empirical Bayes. menggunakan script tertera:
+
 fit <- lmFit(exprs(gset), design)
 fit2 <- contrasts.fit(fit, contrast.matrix)
 fit2 <- eBayes(fit2)
@@ -138,24 +158,38 @@ number=Inf,
 adjust.method="BH"
 )
 head(deg)
+
 Melakukan filter gen signifikan
+
 deg_filtered <- deg[deg$adj.P.Val < 0.05 & abs(deg$logFC) >= 1, ]
 Mengecek jumlah gen signifikan 
 nrow(deg_filtered)
 
 **2.9. Anotasi Nama Gen**
+
 Mengecek anotasi bawaan GEO menggunakan script tertera:
+
 head(fData(gset))
 colnames(fData(gset))
+
 Mengambil informasi anotasi gen bawaan dari GEO menggunakan script tertera:
+
 feature_info <- fData(gset)
+
 Menyalin hasil DEG menggunakan script tertera:
+
 topTableResults <- deg
+
 Menambahkan ID gen (rownames) sebagai kolom menggunakan script tertera:
+
 topTableResults$ID <- rownames(topTableResults)
+
 Memberi ID sebegai simbol gen (apabila tidak ada gen simbol) menggunakan script tertera:
+
 topTableResults$SYMBOL <- topTableResults$ID
+
 Menambahkan deskripsi gen dari GEO menggunakan script tertera:
+
 topTableResults$SYMBOL <- feature_info[
 match(topTableResults$ID, feature_info$ID),
 "Gene symbol"
@@ -164,17 +198,23 @@ topTableResults$GENENAME <- feature_info[
 match(topTableResults$ID, feature_info$ID),
 "Gene title "
 ]
+
 Memeriksa hasil anotasi menggunakan script tertera:
+
 head(topTableResults[, c("ID","SYMBOL","GENENAME")])
 
 **2.9. Visualisasi Volcano Plot**
+
 Menyiapkan data untuk volcano plot menggunakan script tertera:
+
 volcano_data <- data.frame(
 logFC = topTableResults$logFC,
 adj.P.Val = topTableResults$adj.P.Val,
 Gene = topTableResults$SYMBOL
 )
+
 Mengklasifikasikan status gen menggunakan script tertera:
+
 volcano_data$status <- "NO"
 volcano_data$status[
 volcano_data$logFC > 1 & 
@@ -184,7 +224,9 @@ volcano_data$status[
 volcano_data$logFC < -1 & 
 volcano_data$adj.P.Val < 0.05
 ] <- "DOWN"
+
 Membuat Volcano Plot menggunakan script tertera:
+
 ggplot(volcano_data, 
        aes(x = logFC, 
            y = -log10(adj.P.Val), 
@@ -199,24 +241,38 @@ ggplot(volcano_data,
   ggtitle("Volcano Plot DEGs Prakanker_vs_Normal (GSE63514)")
 
 **2.10. Visualisasi Heatmap**
+
 Mengambil top 50 DEG terlebih dahulu (apabila hasil tidak ada gen tersisa) menggunakan script tertera:
+
 top50 <- deg_filtered[order(deg_filtered$adj.P.Val), ][1:50, ]
+
 Mengambil ekspresi dari gset (menggunakan ID gen sebagai rownames) menggunakan script tertera:
+
 mat_heatmap <- exprs(gset)[rownames(top50), ]
+
 Menghapus NA (wajib sebelum heatmap) menggunakan script tertera:
+
 mat_heatmap <- mat_heatmap[complete.cases(mat_heatmap), ]
+
 Membuang gen tanpa variasi menggunakan script tertera:
+
 mat_heatmap <- mat_heatmap[
 apply(mat_heatmap, 1, sd, na.rm = TRUE) > 0,
 ]
+
 Melakukan pengencekan jumlah gen kembali menggunakan script tertera:
 dim(mat_heatmap)
+
 Membuat annotation sampel menggunakan script tertera:
+
 annotation_col <- data.frame(
 Group = groups
 )
+
 rownames(annotation_col) <- colnames(mat_heatmap)
+
 dim(annotation_col)
+
 Menjalankan heatmap menggunakan script tertera:
 pheatmap(
     mat_heatmap,
@@ -233,7 +289,9 @@ pheatmap(
 
 
 **2.11. Analisis Enrichment Gene Ontology (GO) dan KEGG Pathway**
+
 a. Menginstal dan load package menggunakan script tertera:
+
 if (!require("BiocManager", quietly = TRUE))
 install.packages("BiocManager")
 BiocManager::install(c(
@@ -242,20 +300,28 @@ BiocManager::install(c(
 "AnnotationDbi"
 ), ask = FALSE, update = FALSE)
 install.packages("ggplot2")
+
 b. Meload library menggunakan script tertera:
+
 library(clusterProfiler)
 library(org.Hs.eg.db)
 library(AnnotationDbi)
 library(ggplot2)
+
 c. Memastikan platform dataset menggunakan script tertera:
+
 annotation(gset)
+
 d. Mengambil data DEG signifikan menggunakan script tertera:
+
 deg_sig <- topTableResults[
   abs(topTableResults$logFC) >= 1 &
   topTableResults$adj.P.Val < 0.05,
 ]
 nrow(deg_sig)
+
 e. Melakukan pembersihan nama gen menggunakan script tertera:
+
 symbol_clean <- deg_sig$GENENAME
 symbol_clean <- gsub("\\s*\\[.*\\]", "", symbol_clean)
 symbol_clean <- trimws(symbol_clean)
@@ -268,14 +334,18 @@ ignore.case = TRUE
 symbol_clean <- unique(symbol_clean)
 length(symbol_clean)
 head(symbol_clean)
+
 f. Melakukan convert GENENAME menjadi ENTREZID menggunakan script tertera:
+
 gene_df <- bitr(symbol_clean,
                 fromType = "GENENAME",
                 toType   = c("SYMBOL","ENTREZID"),
                 OrgDb    = org.Hs.eg.db)
 head(gene_df)
 nrow(gene_df)
+
 g. Melakukan GO Enrichment (Biological process) menggunakan script tertera:
+
 ego <- enrichGO(
   gene          = gene_df$ENTREZID,
   OrgDb         = org.Hs.eg.db,
@@ -286,12 +356,14 @@ ego <- enrichGO(
 )
 head(ego)
 h. Membuat Grafik Gene Ontology (GO) menggunakan script tertera:
+
 dotplot(ego, showCategory = 15) +
   ggtitle("GO Biological Process")
 barplot(ego, showCategory = 15)
   ggtitle("GO Biological Process")
 
 i. Membuat Grafik KEGG Pathway menggunakan script tertera:
+
 ekegg <- enrichKEGG(
   gene         = gene_df$ENTREZID,
   organism     = "hsa",
@@ -305,21 +377,50 @@ ggtitle("KEGG Pathway Enrichment")
 
 **2.12. Menyimpan Hasil**
 Menyimpan seluruh worskpace (backup) menggunakan script tertera:
+
 save.image("backup.RData")
+
 Menghapus objek besar yang sudah tidak dipakai menggunakan script tertera:
+
 rm(fit, fit2)
 gc()
+
 Menyimpan hasil analisis ke file csv menggunakan menggunakan script tertera:
+
 write.csv(topTableResults,
 "Hasil_GSE63514_DEG.csv",
 row.names = FALSE)
+
 Analisis selesai menggunakan script tertera:
+
 message("Analisis selesai. File hasil telah disimpan.")
 
 
 # Hasil dan Interpretasi Data
 
+Berdasarkan hasil analisis DEG pada dataset GSE63514 menggunakan GEO2R diperoleh 1458 gen yang diekspresikan secara berbeda antara kelompok sampel kontrol (normal) dan penderita prakanker serviks. Gen-gen yang diekspresikan secara berbeda terdiri dari 428 gen upregulated dan 1030 gen downregulated. Hasil visualisasi Volcano Plot dan Diagram Mean-difference plot (Gambar 4a dan 4b) memperlihatkan sejumlah gen yang menunjukkan perbedaan ekspresi gen yang signifikan antar kedua kelompok baik kontrol dan penderita prakanker serviks. Distribusi titik-titik plot yang mewakili sebuah gen terlihat cukup banyak pada kedua sisi grafik menunjukkan adanya perubahan ekspresi gen yang cukup besar. Titik-titik merah pada volcano plot mewakili gen yang mengalami peningkatan ekspresi pada prakanker serviks, sedangkan titik biru mewakili gen yang mengalami penurunan ekspresi pada prakanker serviks, serta titik abu-abu mewakili gen yang tidak berbeda secara signifikan. Pada Mean-difference plot semakim curam kemiringan garis yang menghubungan suatu gen dengan titik asal menunjukkan adanya perbedaan ekspresi antara sampel kontrol dan penderita prakanker serviks. Selain itu, hasil visualisasi diagram venn (Gambar 4c) memperlihatkan bahwa sebanyak 8163 gen berperan aktif terhadap prakanker serviks dan memenuhi kriteria tertentu (log2FC >0 dan Padj. <0,5). 
+
+Gambar 4. Visualisasi hasil GEO2R terhadap perbandingan pasien kontrol dan penderita prakanker serviks a. Volcano Plot; b. Diagram Mean-difference plot; c. Diagram Venn
+
+Hasil visualisasi 50 DEGs teratas pada dataset GSE63514 ditampilkan dalam bentuk heatmap (Gambar 5). Terlihat warna merah yang menujukkan tingkat ekspresi gen yang tinggi (up-regulated) dan warna biru menunjukkan tingkat ekspresi gen yang rendah (down-regulated). Dari hasil klasterisasai heatmap memperlihatkan adanya pemisahan pola ekspresi gen antara kelompok normal dan prakanker seviks, dengan sebagian besar sampel gen masing-masing kelompok terlihak membentuk kelompok bersama. Visualisasi ini menunjukkan bahwa perubahan regulasi gen telah terjadi pada tahap prakanker serviks. Selain itu, terlihat juga adanya kelompok gen yang memiliki pola ekspresi yang tampak serupa di sisi kiri gambar. Gen-gen ini kemungkinan memiliki peran jalur biologis atau proses seluler yang sama. Adanya perbedaan pola ekspresi gen yang jelas dapat mengindikasikan bahwa gen tersebut dapat menjadi biomarker molekuler untuk deteksi dini prakanker serviks. 
+
+ 
+Gambar 5. Heatmap dari 50 DEGs teratas Dataset GSE63514 normal serviks vs prakanker serviks
+
+Gambar 6 memperlihatkan grafik dari hasil analisis enrichment gene ontology (GO) kategori biologi proses dari DEG. Sumbu X (count) pada grafik menunjukkan gumlah gen yang terlibat dalam proses biologis, warna grafik menunjukkan tingkat nilai p. adjust, dan warna merah menunjukkan tingkat signifikansi yang sangat tinggi. Dari hasil analisis menunjukkan bahwa sebagian besar DEG yang di enrichment berkaitan dengan pembelahan dan siklus sel terlihat dari proses biologis diantaranya DNA replication, mitotic nuclear division, nuclear division, dan chromosome segregation. Dimana masing-masing proses biologis tersebut memiliki jumlah gen yang tinggi dan signifikan. Selain itu juga terlihat ada proses biologi seperti transisi fase siklus sel dan regulasi siklus sel. Dimana proses biologis yang berkaitan dengan pengaturan dalam proliferasi sel menunjukkan bahwa tahap awal kanker terjadi peningkatan aktivitas replikasi DNA dan pembelahan sel. 
+ 
+Gambar 6. Gen Ontology (GO) Enrichment dari sampel normal dan prakanker serviks menggunakan dataset GSE63514
+
+Gambar 7 memperlihatkan grafik dari hasil analisis enrichment KEGG Pathway dari DEG yang mengalami perubahan ekspresi pada prakanker serviks. Sumbu x (count) pada grafik menunjukkan gumlah gen yang terlibat dalam proses biologis, warna grafik menunjukkan tingkat nilai p. adjust, dan warna merah menunjukkan tingkat signifikansi yang sangat tinggi. Berdasarkan hasil analisis menunjukkan bahwa jalur yang paling banyak dienrichment adalah cell cycle, cellular senescence, DNA replication, dan P5E signaling pathway. Dimana jalur ini berkaitan erat dengan proses pembelahan sel, proliferasi sel, perbaikan DNA, respon saat terjadi kerusakan gen, dan pengaturan siklus sel. Selain itu, terlihat juga beberapa jalur lain seperti base excision repair dan mismatch repair. Dimana jalur ini berkaitan erat dalam mekanisme perbaikan DNA. Dari hasil visualisasi ini menunjukkan bahwa ekspresi gen pada prakanker serviks berkaitan erat dengan regulasi perbaikan DNA, replikasi DNA, dan siklus sel, dimana ketiganya merupakan proses penting dalam perkembangan kanker stadium awal.
+ 
+Gambar 7. KEGG Pathway Enrichment dari sampel normal dan prakanker serviks menggunakan dataset GSE63514
+
+Gambar 8 memperlihatkan visualisasi jalur pathway in cancer dari hasil analisis KEGG pathway dari DEG antara jaringan epitel serviks normal dan prakanker serviks dari dataset GSE 63514 menggunakan ShinyGo 0.85. Berdasarkan hasil visualisasi peta terlihat adanya kotak berwarna merah yang mengindikasikan adanya gen yang mengalami perubahan ekspresi yang signifikan pada prakanker serviks. Dimana sebagian besar gen yang mengalami perubahan ekspresi terlibat dalam jalur yang berkaitan dengan apoptosis, perbaikan DNA, proliferasi sel, dan regulasi siklus sel. Beberapa jalur sinyal seperti cell cycle checkpoint, DNA damage response, MAPK signaling, dan p53 signaling tampak aktif. Aktifnya jalur ini berkaitan erat dengan penyebab dari adanya peningkatan pembelahan sel yang tidak terkontrol dan berkurangnya proses perbaikan kerusakan DNA. Lalu adanya aktivasi jalur apoptosis menunjukkan bahwa adanya perubahan mekanisme kematian sel terpogram sehingga sel abnormal yang seharusnya dieliminasi tetap bertahap dan berkembang sehingga menyebabkan kanker serviks tahap lanjut. Dari KEGG pathway ini memperkuat hasil enrichment KEGG bahwa proses siklus sel, perbaikan dan replikasi DNA merupakan proses biologi utama perkembangan lesi prakanker serviks menjadi kanker serviks.
+
+
 # Kesimpulan
+
+Hasil analisis DEGs pada dataset GSE63514 didapatkan total DEGs sebanyak 1458 gen, dengan 428 gen upregulation dan 1030 gen downregulation. Hasil visualisasi volcano plot, mean-difference plot, dan heatmap menunjukkan adanya perbedaan pola ekspresi gen yang jelas antara kedua kelompok sampel. Analisis Gene Ontology (GO) dan KEGG pathway menunjukkan bahwa gen-gen tersebut terutama terlibat dalam proses siklus sel, replikasi DNA, pembelahan sel, serta mekanisme perbaikan DNA. Secara keseluruhan, hasil ini menunjukkan bahwa perubahan regulasi gen pada tahap prakanker serviks berkaitan dengan peningkatan proliferasi sel dan gangguan mekanisme kontrol siklus sel yang berperan dalam perkembangan awal kanker serviks.
 
 # Daftar Pustaka
 den Boon, J. A., Dohun, P., Sophia, S. W., Mark, H., Mark, S., Mark, S., Rosemary, E. Z., Zhishi, W., Stephen, M. H., Rachel, P., Meghan, S., Lisa, C., Qiuling, H., Paul, L., Joan, W., Michael, A. N., Nicolas, W., Paul, A. (2015). Molecular transitions from papillomavirus infection to cervical precancer and cancer: Role of stromal estrogen receptor signaling. The Proceedings of the National Academy of Sciences, 112(25). Doi: 10.1073/pnas.1509322112.
