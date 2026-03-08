@@ -11,35 +11,53 @@ Tujuan analisis ini adalah untuk mengetahui hasil analisis Differentially Expres
 # Metode
 # Analisis Menggunakan GEO2R
 **1.	Pencarian dan Pengunduhan Dataset Ekspresi Gen Publik Kanker Serviks**
+
 Dataset yang digunakan yaitu GSE63514 Homo sapiens yang diambil dari database Gene Expression Omnibus (GEO) (https://www.ncbi.nlm.nih.gov/geo/). Dataset ini dipilih karena berisi data mengenai ekspresi gen pada sel epitel serviks normal, sel epitel prakanker serviks meliputi CIN1, CIN2, dan CIN3, hingga sel epitel kanker serviks. 
 
 **2.	Identifikasi Differentially Expressed Genes (DEGs) Pada Kanker Serviks**
+
 Identifikasi menggunakan alat analisis online GEO2R (https://www.ncbi.nlm.nih.gov/geo/geo2r). GEO2R digunakan untuk mengidentifikasi gen-gen yang dieskpresikan secara berbeda berdasarkan kondisi biologis atau perlakuan. Dalam analisis ini yaitu mengidentifikasi ekspresi gen yang berbeda pada sampel sel epitel serviks sehat atau normal sebanyak 24 sampel, serta sel epitel dengan tingkat lesi prakanker serviks yang berbeda diantaranya CIN1 sebanyak 14 sampel, CIN2 sebanyak 22 sampel, dan CIN 3 sebanyak 40 sampel.
 Sampel dilakukan pengelompokkan yaitu Group 1 = sel epitel serviks pasien sehat (Kontrol) dan Group 2 = sel epitel pasien dengan lesi prakanker serviks CIN1, CIN2, CIN3 (penderita prakanker serviks) yang berbeda. Koreksi multiple testing menggunakan metode Benjamini & Hochberg (False Discovery Rate). Metode Benjamini & Hochberg (FDR) digunakan untuk mengurangi kemungkinan kesalahan tipe I akibat dari pengujian ribuan gen secara bersamaan. Perhitungan differential expression menggunakan metode limma. Gen dikategorikan sebagai DEGs apabila memenuhi kriteria:  Adjusted p-value < 0,05 dan |log2 fold change| ≥ 0 tertera pada Gambar 3. Untuk memastikan konsistensi hasil, analisis GEO2R dilakukan sebanyak tiga kali replikasi dengan parameter dan alur yang sama.
 
 **3.	Analisis Visualisasi Differentially Expressed Genes (DEGs) Pada Kanker Serviks**
+
 Analisis DEG divisualisasikan menggunakan empat visual diantaranya Volcano Plot, diagram Mean-difference plot, diagram Venn, dan Heatmap. Empat visualisasi ini untuk memudahkan menginterpretasi data. Volcano plot untuk melihat hasil distribusi gen yang mengalami peningkatan (up-regulation) dan penurunan (down-regulation) secara signifikan. Diagram Mean-difference plot digunakan untuk melihat hubungan antara rata-rata ekpresi gen dan perubahan ekspresi gen antar kelompok sampel. Diagram Venn digunakan untuk melihat adanya kesamaan gen yang signifikan antar kelompok data sampel. Heatmap digunakan untuk menampilkan pola ekspresi gen pada setiap kelompok sampel.
 
 **4. Analisis Enrichment Gene Ontology (GO) dan KEGG**
+
 Gen yang signifikan kemudian dilakukan analisis Enrichment Gene Ontology (GO) dan Kyoto Encyclopedia of Genes and Genomes (KEGG) yang tujuannya untuk mengetahui fungsi biologis gen tersebut. Analisis ini mengelompokkan gen berdasarkan proses biologis, fungsi molekuler, dan komponen selulernya. Analisis GO dan KEGG menggunakan bahasa pemrograman R dengan metode enrichment analysis untuk identifikasi kategori GO dan KEGG yang signifikan dari gen-gen yang telah diperoleh.
 
 **5. Analisis Jalur Biologis (KEGG Pathway Analysis)**
+
 Gen yang terlah dianalisis Enrichment selanjutnya dianalisis jalur biologisnya menggunakan KEGG Pathway analysis. Tujuan analisis ini yaitu untuk mengetahui peta jalur tentang interaksi jaringan, reaksi, dan hubungan mekanisme molekuler yang terlibat dalam penyakit tersebut. Analisis KEGG pathway menggunakan platform ShinyGO versi 0.85. 
 
 # 6. Analisis Menggunakan Perangkat R
 **6.1 Persiapan Perangkat Lunak dan Pengolahan Data**
+
 a. Terlebih dahulu mengunduh dan menginstal perangkat lunak R for Window (versi 4.5.2) di (https://cran.r-project.org/) dan Rstudio Dekstop (versi 2026.01.1+403) di (: https://posit.co/download/rstudio-desktop/). 
+
 b. Setelah itu, menginstal manager paket Bioconductor yaitu BiocManager. Dengan menggunakan script tertera:
+
 if (!require("BiocManager", quietly = TRUE))
+
 install.packages("BiocManager") 
+
 BiocManager::install(version = "3.22")
+
 BiocManager::install("hgu133a.db")
+
 c. BiocManager yang digunakan dalam analisis ini yaitu GEOquery dan limma. Dengan menggunakan script tertera:
+
 BiocManager::install(c("GEOquery", "limma"), ask = FALSE, update = FALSE) 
+
 d. Selanjutnya menginstal dplyr untuk memotong dan merapikan tabel data agar mudah diolah. Dengan menggunakan script tertera:
+
 install.packages("dplyr")
+
 e. Setelah itu menginstal paket CRAN untuk visualisasi meliputi ggplot (Volcano Plot), pheatmap (Heatmap), gplots & RcolorBrewer (Diagram Venn dan palet warna), dan UMAP. Dengan menggunakan script tertera:
+
 install.packages(c("ggplot2", "pheatmap", "gplots", "RColorBrewer"))
+
 f. Tahap terakhir cek instalasi. Dengan menggunakan script tertera:
 library(GEOquery)
 library(limma)
