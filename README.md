@@ -9,6 +9,7 @@ Kanker serviks merupakan salah satu jenis kanker dengan penyumbang kematian tert
 Tujuan analisis ini adalah untuk mengetahui hasil analisis Differentially Expressed Genes (DEGs) pada pasien dengan kondisi berbeda, yaitu antara jaringan serviks sehat sebagai Normal Serviks (Normal Serviks) dan jaringan prakanker serviks dengan tingkat lesi yang berbeda, yaitu Cervical Intraepithelial Neoplasia tingkat PRAKANKER SERVIKS1, PRAKANKER SERVIKS2, dan PRAKANKER SERVIKS3, serta melakukan visualisasi dan interpretasi data ekspresi gen untuk memahami perubahan gen yang berperan dalam perkembangan lesi prakanker serviks.
 
 # Metode
+# Analisis Menggunakan GEO2R
 **1.	Pencarian dan Pengunduhan Dataset Ekspresi Gen Publik Kanker Serviks**
 Dataset yang digunakan yaitu GSE63514 Homo sapiens yang diambil dari database Gene Expression Omnibus (GEO) (https://www.ncbi.nlm.nih.gov/geo/). Dataset ini dipilih karena berisi data mengenai ekspresi gen pada sel epitel serviks normal, sel epitel prakanker serviks meliputi CIN1, CIN2, dan CIN3, hingga sel epitel kanker serviks. 
 
