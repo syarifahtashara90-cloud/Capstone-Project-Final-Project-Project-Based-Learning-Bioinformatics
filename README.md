@@ -32,10 +32,15 @@ Analisis DEG divisualisasikan menggunakan empat visual diantaranya Volcano Plot,
 
 # Daftar Pustaka
 den Boon, J. A., Dohun, P., Sophia, S. W., Mark, H., Mark, S., Mark, S., Rosemary, E. Z., Zhishi, W., Stephen, M. H., Rachel, P., Meghan, S., Lisa, C., Qiuling, H., Paul, L., Joan, W., Michael, A. N., Nicolas, W., Paul, A. (2015). Molecular transitions from papillomavirus infection to cervical precancer and cancer: Role of stromal estrogen receptor signaling. The Proceedings of the National Academy of Sciences, 112(25). Doi: 10.1073/pnas.1509322112.
+
 Globocan. (2022). Cancer Today Indonesia. World Health Organization. https://gco.iarc.who.int/media/globocan/factsheets/populations/360-indonesia-fact-sheet.pdf.
+
 Karimah, R., Endah, I., Dwinka, S. E., Fira, S., Fatimah, N. F., Muhammad, N. H., Rizka, N. H., Desiana, W. S., Rahmah, Y. R., Lely, N., Zain, B. S., & Sonny, F. (2025). peningkatan deteksi dini kanker serviks melalui skrining HPV DNA kepada masyarakat di Institut Teknologi Sepuluh Nopember. Jurnal Pengabdian Kepada Masyarakat, 9(6), 1637-1646. Doi: 10.12962/j26139960.v9i6.9141.
+
 Mayasari, S. P. (2025). Komparasi efikasi skrining kanker serviks menggunakan HPV DNA testing, pap smear, dan liquid biopsy: Tinjauan Sistematis. Indonesian Journal of Health Community, 6(1), 33-41. Doi: 10.31331/ijheco.v6i1.3893.
+
 Mello, V., & Renee, K. S. (2023). Neoplasia Intraepitel Serviks. StatPearls Publishing. https://www.ncbi.nlm.nih.gov/books/NBK544371/.
+
 Shemuel, J., Priscilla, A., Evelina, J., Daniel, R. F., Vania, G., Shaheer, A., & Arli, A. P. (2023). Analisis gen komparatif karsinoma sel skuamosa paru-paru antara individu merokok dan tidak merokok. Berita Biologi, 22(3)., 291-304. Doi: 10.14203/beritabiologi.v20i1.3991.
 Waghe, T., & Neema, A. (2024). Advancements in the management of cervical intraepithelial neoplasia: a comprehensive review. Cureus, 16(4), 1-11. Doi: 10.7759/cureus.58645.
 Yo, E. C., & Kartika, H. N. (2023). Molecular and host lifestyle factors associated with persistent human Papillomavirus infection and progression into cervical cancer: a literature review. Indonesian Journal of Cancer, 18(2), 227–233. Doi: 10.33371/ijoc.v18i2.1068.
