@@ -9,22 +9,23 @@ Kanker serviks merupakan salah satu jenis kanker dengan penyumbang kematian tert
 Tujuan analisis ini adalah untuk mengetahui hasil analisis Differentially Expressed Genes (DEGs) pada pasien dengan kondisi berbeda, yaitu antara jaringan serviks sehat sebagai Normal Serviks (Normal Serviks) dan jaringan prakanker serviks dengan tingkat lesi yang berbeda, yaitu Cervical Intraepithelial Neoplasia tingkat PRAKANKER SERVIKS1, PRAKANKER SERVIKS2, dan PRAKANKER SERVIKS3, serta melakukan visualisasi dan interpretasi data ekspresi gen untuk memahami perubahan gen yang berperan dalam perkembangan lesi prakanker serviks.
 
 # Metode
-# 1.	Pencarian dan Pengunduhan Dataset Ekspresi Gen Publik Kanker Serviks
+**1.	Pencarian dan Pengunduhan Dataset Ekspresi Gen Publik Kanker Serviks**
 Dataset yang digunakan yaitu GSE63514 Homo sapiens yang diambil dari database Gene Expression Omnibus (GEO) (https://www.ncbi.nlm.nih.gov/geo/). Dataset ini dipilih karena berisi data mengenai ekspresi gen pada sel epitel serviks normal, sel epitel prakanker serviks meliputi CIN1, CIN2, dan CIN3, hingga sel epitel kanker serviks. 
 
-# 2.	Identifikasi Differentially Expressed Genes (DEGs) Pada Kanker Serviks
+**2.	Identifikasi Differentially Expressed Genes (DEGs) Pada Kanker Serviks**
 Identifikasi menggunakan alat analisis online GEO2R (https://www.ncbi.nlm.nih.gov/geo/geo2r). GEO2R digunakan untuk mengidentifikasi gen-gen yang dieskpresikan secara berbeda berdasarkan kondisi biologis atau perlakuan. Dalam analisis ini yaitu mengidentifikasi ekspresi gen yang berbeda pada sampel sel epitel serviks sehat atau normal sebanyak 24 sampel, serta sel epitel dengan tingkat lesi prakanker serviks yang berbeda diantaranya CIN1 sebanyak 14 sampel, CIN2 sebanyak 22 sampel, dan CIN 3 sebanyak 40 sampel.
 Sampel dilakukan pengelompokkan yaitu Group 1 = sel epitel serviks pasien sehat (Kontrol) dan Group 2 = sel epitel pasien dengan lesi prakanker serviks CIN1, CIN2, CIN3 (penderita prakanker serviks) yang berbeda. Koreksi multiple testing menggunakan metode Benjamini & Hochberg (False Discovery Rate). Metode Benjamini & Hochberg (FDR) digunakan untuk mengurangi kemungkinan kesalahan tipe I akibat dari pengujian ribuan gen secara bersamaan. Perhitungan differential expression menggunakan metode limma. Gen dikategorikan sebagai DEGs apabila memenuhi kriteria:  Adjusted p-value < 0,05 dan |log2 fold change| ≥ 0 tertera pada Gambar 3. Untuk memastikan konsistensi hasil, analisis GEO2R dilakukan sebanyak tiga kali replikasi dengan parameter dan alur yang sama.
 
-# 3.	Analisis Visualisasi Differentially Expressed Genes (DEGs) Pada Kanker Serviks
+**3.	Analisis Visualisasi Differentially Expressed Genes (DEGs) Pada Kanker Serviks**
 Analisis DEG divisualisasikan menggunakan empat visual diantaranya Volcano Plot, diagram Mean-difference plot, diagram Venn, dan Heatmap. Empat visualisasi ini untuk memudahkan menginterpretasi data. Volcano plot untuk melihat hasil distribusi gen yang mengalami peningkatan (up-regulation) dan penurunan (down-regulation) secara signifikan. Diagram Mean-difference plot digunakan untuk melihat hubungan antara rata-rata ekpresi gen dan perubahan ekspresi gen antar kelompok sampel. Diagram Venn digunakan untuk melihat adanya kesamaan gen yang signifikan antar kelompok data sampel. Heatmap digunakan untuk menampilkan pola ekspresi gen pada setiap kelompok sampel.
 
-# 4. Analisis Enrichment Gene Ontology (GO) dan KEGG 
+**4. Analisis Enrichment Gene Ontology (GO) dan KEGG**
 
-# 5. Analisis Jalur Biologis (KEGG Pathway Analysis)
+**5. Analisis Jalur Biologis (KEGG Pathway Analysis)**
 
 # 6. Analisis Menggunakan Perangkat R
-# 6.1 Persiapan Perangkat Lunak dan Pengolahan Data
+**6.1 Persiapan Perangkat Lunak dan Pengolahan Data**
+
 
 # Hasil dan Interpretasi Data
 
